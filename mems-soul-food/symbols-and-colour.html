@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="en-NZ"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><title>Mem's Soul Food – Symbols &amp; Colour | PDC Creative</title><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style></head><body>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Young+Serif&family=Instrument+Sans:wght@400;500;600&family=Caveat:wght@600&display=swap">
+<style>
+/* Layout: a two-part visual workbook (Symbols, then Colour), one long scroll with a sticky progress bar; every answer is a tap */
+:root{
+  --bg:#F3F0E8; --paper:#FFFDF8; --ink:#22281F; --muted:#5F665A; --line:#DAD5C7;
+  --leaf:#3A4A26; --turmeric:#C99238; --rust:#883D17; --sel:#3A4A26; --selInk:#FFFDF8;
+  --display:"Young Serif", Georgia, serif; --body:"Instrument Sans", system-ui, sans-serif; --hand:"Caveat", cursive;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#151912; --paper:#1D2219; --ink:#EDE9DE; --muted:#A5AC9C; --line:#343C2E;
+  --leaf:#B5C68E; --turmeric:#E3AE52; --rust:#E08A5E; --sel:#E3AE52; --selInk:#151912; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#151912; --paper:#1D2219; --ink:#EDE9DE; --muted:#A5AC9C; --line:#343C2E;
+  --leaf:#B5C68E; --turmeric:#E3AE52; --rust:#E08A5E; --sel:#E3AE52; --selInk:#151912; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.55;margin:0}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:0 80px}
+header.bar{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.bar .in{max-width:980px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:10px;display:flex;align-items:center;gap:16px}
+.bar .t{font-family:var(--display);font-size:15px;white-space:nowrap}
+.prog{flex:1;height:6px;background:var(--line);border-radius:99px;overflow:hidden;min-width:60px}
+.prog i{display:block;height:100%;width:0;background:var(--turmeric);transition:width .4s}
+.status{font-size:12px;color:var(--muted);white-space:nowrap}
+h1,h2,h3{font-family:var(--display);font-weight:400;text-wrap:balance;margin:0}
+.hero{padding-block:52px 28px;display:grid;gap:16px}
+.hero h1{font-size:clamp(38px,7vw,66px);line-height:1.02;color:var(--leaf)}
+.hero h1 em{font-style:normal;color:var(--rust)}
+.hero p{max-width:62ch;margin:0;font-size:18px;color:var(--muted)}
+.how{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:14px;color:var(--muted)}
+.how b{color:var(--ink);font-weight:600}
+.strip{display:flex;height:10px;max-width:340px;border-radius:99px;overflow:hidden}
+.strip i{flex:1}
+.part{margin-top:36px;padding:28px 24px;border-radius:18px;background:var(--leaf);color:var(--bg);display:grid;gap:8px}
+.part .k{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;opacity:.85}
+.part h2{font-size:clamp(28px,4.4vw,40px)}
+.part p{margin:0;max-width:60ch;opacity:.9}
+section.q{padding-block:40px;border-top:1px solid var(--line);display:grid;gap:18px}
+.part + section.q{border-top:0}
+.qh{display:grid;gap:6px}
+.num{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--rust);font-weight:600}
+.qh h2{font-size:clamp(25px,4vw,34px);line-height:1.12}
+.qh p{margin:0;color:var(--muted);max-width:64ch}
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fill,minmax(210px,1fr))}
+.grid.xs{grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
+.grid.sm{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+.grid.lg{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+button{font:inherit;color:inherit;cursor:pointer}
+.card{position:relative;background:var(--paper);border:1.5px solid var(--line);border-radius:14px;padding:0;text-align:left;overflow:hidden;display:flex;flex-direction:column;min-width:0;transition:transform .15s,border-color .15s,box-shadow .15s}
+button.card:hover{transform:translateY(-2px)}
+.card:focus-visible,.chip:focus-visible,.rate button:focus-visible,input:focus-visible,textarea:focus-visible,.btn:focus-visible{outline:3px solid var(--turmeric);outline-offset:2px}
+.card[aria-pressed="true"]{border-color:var(--sel);box-shadow:0 0 0 2px var(--sel)}
+.card[aria-pressed="true"]::after{content:"✓";position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:50%;background:var(--sel);color:var(--selInk);display:grid;place-items:center;font-size:13px;font-weight:700}
+.card.hero-pick[aria-pressed="true"]::after{content:"★"}
+.cap{padding:12px 14px;display:grid;gap:2px}
+.cap b{font-weight:600;line-height:1.3}
+.cap span{font-size:13px;color:var(--muted)}
+svg.i{width:100%;height:100%;stroke:currentColor;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.fam .icons{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:20px 16px 8px;color:var(--leaf)}
+.fam .icons span{aspect-ratio:1;max-width:100%;display:block}
+.rate{display:flex;gap:6px;padding:0 14px 14px;margin-top:auto}
+.rate button{flex:1;border:1px solid var(--line);background:transparent;border-radius:99px;padding:6px 0;font-size:13px}
+.rate button[aria-pressed="true"]{background:var(--sel);color:var(--selInk);border-color:var(--sel)}
+.rate button.no[aria-pressed="true"]{background:var(--rust);border-color:var(--rust);color:#fff}
+.ico{align-items:center;text-align:center;padding:16px 8px 10px;gap:8px}
+.ico .g{width:42px;height:42px;color:var(--leaf)}
+.ico b{font-size:13px;font-weight:500;line-height:1.25}
+.style .art{height:130px;display:grid;place-items:center;color:var(--leaf);background:var(--bg)}
+.style .art svg{width:88px;height:88px}
+.mock{height:130px;display:flex;align-items:center;justify-content:center;gap:10px;padding:12px;background:var(--bg);color:var(--leaf)}
+.mock .nm{font-family:var(--body);font-weight:600;font-size:17px;letter-spacing:.02em;line-height:1.1}
+.mock .nm small{display:block;font-weight:400;font-size:11px;letter-spacing:.18em;text-transform:uppercase;opacity:.75;margin-top:3px}
+.mock .g{width:44px;height:44px;flex:none}
+.opt{padding:18px;gap:6px}
+.opt b{font-family:var(--display);font-weight:400;font-size:20px;line-height:1.2}
+.opt span{font-size:14px;color:var(--muted)}
+.opt .eg{display:flex;gap:8px;color:var(--leaf);margin-top:6px}
+.opt .eg span{width:28px;height:28px;display:block}
+.sliders{display:grid;gap:22px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px}
+.sl{display:grid;gap:6px}
+.sl .ends{display:flex;justify-content:space-between;font-size:15px;font-weight:500;gap:12px}
+.sl .ends span:last-child{text-align:right}
+input[type=range]{width:100%;accent-color:var(--turmeric)}
+.field{display:grid;gap:6px}
+.field label{font-weight:600;font-size:15px}
+.field small{color:var(--muted);font-size:13px}
+textarea{width:100%;font:inherit;color:var(--ink);background:var(--paper);border:1.5px solid var(--line);border-radius:10px;padding:12px 14px;resize:vertical;min-height:88px}
+.two{display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.hint{font-size:13px;color:var(--muted)}
+.count{font-size:13px;color:var(--rust);font-weight:600}
+.pal .sw{display:flex;height:86px}
+.pal .sw i{flex:1}
+.board img{display:block;width:100%;aspect-ratio:3/2;object-fit:cover;background:var(--line)}
+.board .sw{display:flex;height:22px}
+.board .sw i{flex:1}
+.mixart{aspect-ratio:3/2;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr)}
+.swatch .blk{height:78px;position:relative}
+.swatch .cap{padding:9px 11px}
+.swatch .cap b{font-size:14px}
+.swatch .cap span{font-variant-numeric:tabular-nums;font-size:12px}
+.base .art{height:150px;display:grid;place-items:center;gap:6px;padding:14px;text-align:center}
+.base .art .nm{font-family:var(--display);font-size:24px;line-height:1.05}
+.base .art .tg{font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+.base .art .dots{display:flex;gap:6px;justify-content:center}
+.base .art .dots i{width:14px;height:14px;border-radius:50%}
+.acc{display:grid;gap:14px}
+.acc-row{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:stretch;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px}
+.acc-row h3{font-size:20px;align-self:center}
+.acc-row h3 small{display:block;font-family:var(--body);font-size:13px;color:var(--muted);margin-top:4px;line-height:1.35}
+.acc-opts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;min-width:0}
+.acc-opts .card .blk{height:56px}
+.acc-opts .cap{padding:8px 10px}
+.acc-opts .cap b{font-size:14px}
+.finish{background:var(--leaf);color:var(--bg);border-radius:18px;padding:32px 24px;display:grid;gap:14px;margin-top:20px}
+.finish h2{font-size:32px}
+.finish p{margin:0;max-width:60ch;opacity:.92}
+.btns{display:flex;flex-wrap:wrap;gap:10px}
+.btn{border:0;border-radius:99px;padding:12px 22px;font-weight:600;background:var(--turmeric);color:#22281F}
+.btn.ghost{background:transparent;border:1.5px solid currentColor;color:inherit}
+#copyBox{color:var(--ink)}
+.credit{margin-top:28px;font-size:13px;color:var(--muted);text-align:center}
+.note{font-family:var(--hand);font-size:22px;color:var(--rust);line-height:1.2}
+@media (max-width:620px){.acc-row{grid-template-columns:1fr}.bar .t{display:none}}
+@media (max-width:420px){.acc-opts{grid-template-columns:1fr 1fr 1fr;gap:6px}.acc-opts .cap b{font-size:12px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+
+<header class="bar"><div class="in"><span class="t">Symbols &amp; Colour</span><div class="prog" aria-hidden="true"><i id="progbar"></i></div><span class="status" id="status">Not saved yet</span></div></header>
+
+<main class="wrap">
+  <div class="hero">
+    <div class="strip" aria-hidden="true"><i style="background:#2E3518"></i><i style="background:#5D5929"></i><i style="background:#883D17"></i><i style="background:#C99238"></i><i style="background:#D0B081"></i><i style="background:#00565D"></i><i style="background:#B54368"></i><i style="background:#25412A"></i></div>
+    <h1>Mem's Soul Food<br><em>Symbols &amp; Colour</em></h1>
+    <p>Mem, this one is short and visual. It helps us choose two things for your brand: the symbols we draw from, and the colours that carry it. Tap what feels like you and skip what doesn't. Go with your gut; you can change anything later.</p>
+    <p class="hint" style="font-size:15px">Ignore the fonts on this page. Cath is looking after typography separately, so please judge the symbols and colours only.</p>
+    <div class="how"><span><b>About 12 minutes</b></span><span><b>Saves as you go</b></span><span><b>Part 1:</b> Symbols</span><span><b>Part 2:</b> Colour</span></div>
+  </div>
+  <div id="app"></div>
+  <section class="finish" id="finish">
+    <h2>Thank you, Mem.</h2>
+    <p>When you're happy, tap Send to the PDC team. You can still come back and change your answers afterwards.</p>
+    <div class="btns">
+      <button class="btn" id="submit" type="button">Send to the PDC team</button>
+      <button class="btn ghost" id="copy" type="button">Copy my answers as text</button>
+    </div>
+    <p id="finishMsg" style="margin:0"></p>
+    <textarea id="copyBox" hidden readonly aria-label="Your answers as text"></textarea>
+  </section>
+  <p class="credit">Prepared by PDC Creative for Mem's Soul Food · Visual direction, November 2026</p>
+</main>
+
+<script>
+/* ---------- icon library (24px grid, line style) ---------- */
+const rot=(d,n,cx=12,cy=12)=>Array.from({length:n},(_,i)=>`<path d="${d}" transform="rotate(${i*360/n} ${cx} ${cy})"/>`).join('');
+const curry=()=>{let s='<path d="M12 22V3"/>';[6,10,14,18].forEach(y=>{s+=`<path d="M12 ${y}c-2.2-.2-4.6-1.6-5.2-3.6 2.3-.2 4.6 1 5.2 3.6z"/><path d="M12 ${y}c2.2-.2 4.6-1.6 5.2-3.6-2.3-.2-4.6 1-5.2 3.6z"/>`});return s+'<path d="M12 3c-1 1-1 2 0 3 1-1 1-2 0-3z"/>'};
+const star=()=>{let p=[];for(let i=0;i<16;i++){const r=i%2?3.4:9.2,a=Math.PI*i/8-Math.PI/2;p.push((12+r*Math.cos(a)).toFixed(1)+' '+(12+r*Math.sin(a)).toFixed(1))}return `<path d="M${p.join('L')}z"/><circle cx="12" cy="12" r="1.2"/>`};
+const I={
+ curryleaf:curry(),
+ lotus:'<path d="M12 20c-4 0-8-3-8-7 3 0 5 1 6 3M12 20c4 0 8-3 8-7-3 0-5 1-6 3M12 20c-2-2-3-5-3-8 0-2 1-4 3-6 2 2 3 4 3 6 0 3-1 6-3 8z"/>',
+ frangipani:rot('M12 12c-.6-3.4.8-7 3.6-8 .8 2.6-.6 6.2-3.6 8z',5)+'<circle cx="12" cy="12" r="1.3"/>',
+ hibiscus:rot('M12 12c-3-2-3.6-6.4-.6-7.6 3-1 4.2 3.4.6 7.6z',5)+'<path d="M12 12l4.5-5.5"/><circle cx="17" cy="6" r=".9"/>',
+ fern:'<path d="M5 21c1-8 5-14 13-17"/><path d="M7.5 15.5l-3-1.5M8.8 12.6 5.8 10.5M10.6 9.8 8.2 7.2M13 7.4 11.4 4.6M7.5 15.5l2.6 1.4M8.8 12.6l3 .9M10.6 9.8l3.2.3M13 7.4l3.1-.2"/>',
+ palm:'<path d="M15 22c-.4-5-1.4-9-4-12.5"/><path d="M11 9.5C8 7 4.5 7 2.5 9M11 9.5c-1-3-4-5-7-4.5M11 9.5c1-3 4-5 7.5-4M11 9.5c3-1 6.5 0 8.5 3"/><path d="M2 22h20"/>',
+ rice:'<path d="M8 22c1-6 4-11 9-15"/>'+[[10.6,15],[12.4,12],[14.4,9.5],[16.8,7.2]].map(([x,y])=>`<ellipse cx="${x-1.6}" cy="${y-1.6}" rx="1" ry="1.9" transform="rotate(-35 ${x-1.6} ${y-1.6})"/><ellipse cx="${x+1.6}" cy="${y+.6}" rx="1" ry="1.9" transform="rotate(55 ${x+1.6} ${y+.6})"/>`).join(''),
+ chilli:'<path d="M17.5 7.5C17 14 11 19.5 3.5 20c4.5-3 8-6.8 9.5-12"/><path d="M13 8c1.5-1.4 3.2-1.4 4.5-.5"/><path d="M17.5 7.5c.2-2 1.3-3.3 3-3.5"/>',
+ cinnamon:'<path d="M4 15.5l9.5-9.5a2.1 2.1 0 0 1 3 3L7 18.5a2.1 2.1 0 0 1-3-3z"/><path d="M8.5 20.5 18 11a2.1 2.1 0 0 1 3 3l-6.5 6.5"/><path d="M5.6 15.6a.8.8 0 0 0 1.2 1.2"/>',
+ staranise:star(),
+ cardamom:'<path d="M12 2.5c4.2 4 4.2 15 0 19-4.2-4-4.2-15 0-19z"/><path d="M12 2.5v19"/><path d="M12 2.5c.5-.8 1.3-1 2-.8"/>',
+ coconut:'<path d="M3 12h18a9 9 0 0 1-18 0z"/><path d="M6.2 12a5.8 5.8 0 0 0 11.6 0"/><circle cx="9" cy="6.5" r=".8"/><circle cx="12" cy="5" r=".8"/><circle cx="15" cy="6.5" r=".8"/>',
+ sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M5 19l2-2M17 7l2-2"/>',
+ wave:'<path d="M2 10c3-3 5-3 8 0s5 3 8 0 3-1 4 0M2 16c3-3 5-3 8 0s5 3 8 0 3-1 4 0"/>',
+ flame:'<path d="M12 21c-4 0-6-3-6-6 0-4 4-6 4-11 3 2 5 5 5 8 1-1 2-2 2-3 1 2 1 3 1 6 0 3-2 6-6 6z"/>',
+ mountain:'<path d="M2 20 9 8.5l4 6.5 3-4.5L22 20z"/><path d="M7.3 11.3 9 12.5l1.6-1.3"/>',
+ moon:'<path d="M20 14A8 8 0 1 1 10 4a6 6 0 0 0 10 10z"/>',
+ drop:'<path d="M12 3c4 5 6 8 6 11a6 6 0 0 1-12 0c0-3 2-6 6-11z"/><path d="M9 15a3 3 0 0 0 3 3"/>',
+ sprout:'<path d="M12 21v-8M12 13c0-4-3-6-7-6 0 4 3 6 7 6zM12 11c0-3 2-5 6-5 0 3-2 5-6 5z"/><path d="M7 21h10"/>',
+ claypot:'<path d="M9 4h6M9.5 4v3M14.5 4v3M7 7h10"/><path d="M8.5 7C5 9 4 12.5 5.2 15.6 6.4 18.8 9 20.5 12 20.5s5.6-1.7 6.8-4.9C20 12.5 19 9 15.5 7"/><path d="M6 13h12"/>',
+ mortar:'<path d="M4 12h16l-2 7H6z"/><path d="M14 12l6-8"/><path d="M5 21h14"/>',
+ bowl:'<path d="M3 11h18a9 9 0 0 1-18 0z"/><path d="M8 7c0-1 1-1 1-2M12 7c0-1 1-1 1-2M16 7c0-1 1-1 1-2"/>',
+ leafplate:'<path d="M2.5 13c4-6.5 15-6.5 19 0-4 5-15 5-19 0z"/><path d="M2.5 13h19"/><circle cx="8.5" cy="11" r="1.6"/><circle cx="13" cy="10.5" r="1.2"/><circle cx="16.5" cy="11.2" r="1"/>',
+ spoon:'<ellipse cx="16" cy="7.5" rx="3.2" ry="4.4" transform="rotate(45 16 7.5)"/><path d="M13.6 10.4 4 20"/>',
+ spiral:'<path d="M12 12a1 1 0 1 1 1 1 3 3 0 1 1-3-3 5 5 0 1 1-5 5 7 7 0 1 1 7 7"/>',
+ heart:'<path d="M12 20s-8-5-8-11a4 4 0 0 1 8-1 4 4 0 0 1 8 1c0 6-8 11-8 11z"/>',
+ mandala:'<circle cx="12" cy="12" r="2.4"/><circle cx="12" cy="12" r="9.5"/>'+rot('M12 9.6c-1.6-1.6-1.6-4 0-5.4 1.6 1.4 1.6 3.8 0 5.4z',8),
+ lamp:'<path d="M3.5 14.5c2 3.5 15 3.5 17 0z"/><path d="M8 19h8"/><path d="M12 13.5c-2-1.6-1.4-4.6 0-7.5 1.4 2.9 2 5.9 0 7.5z"/>',
+ tree:'<circle cx="12" cy="9" r="6.5"/><path d="M12 15.5V21M12 18l-3.5 3M12 18l3.5 3M12 12.5 9.5 10M12 13.5l3-3"/>',
+ hands:'<path d="M4 14c2 4 5 6 8 6s6-2 8-6M7 14l-1-6M10 14V7M14 14V7M17 14l1-6"/>',
+ people:'<circle cx="12" cy="6" r="2.2"/><circle cx="5.5" cy="10" r="2"/><circle cx="18.5" cy="10" r="2"/><path d="M8.5 13.5a3.5 3.5 0 0 1 7 0M2.5 17a3 3 0 0 1 6 0M15.5 17a3 3 0 0 1 6 0"/><path d="M5 21c4.5 1.4 9.5 1.4 14 0"/>',
+ heartHands:'<path d="M12 12.5s-4-2.5-4-5.5a2 2 0 0 1 4-.5 2 2 0 0 1 4 .5c0 3-4 5.5-4 5.5z"/><path d="M3 13c2.5 4.5 5.5 7 9 7s6.5-2.5 9-7"/><path d="M3 13l2.5-1 2 3M21 13l-2.5-1-2 3"/>',
+ rings:'<circle cx="9" cy="12" r="5.5"/><circle cx="15" cy="12" r="5.5"/>',
+ kolam:'<path d="M12 3l9 9-9 9-9-9z"/><path d="M12 7.5 16.5 12 12 16.5 7.5 12z"/><circle cx="12" cy="5.4" r=".5"/><circle cx="12" cy="18.6" r=".5"/><circle cx="5.4" cy="12" r=".5"/><circle cx="18.6" cy="12" r=".5"/><circle cx="12" cy="12" r=".7"/>',
+ weave:'<path d="M3 7h18M3 12h18M3 17h18"/><path d="M7 3v3M7 8v3M7 13v3M7 18v3M12 3v1.5M12 6.5V10M12 14v2M12 18v3M17 3v3M17 8v3M17 13v3M17 18v3"/>',
+ batik:'<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4"/>'+[0,45,90,135,180,225,270,315].map(a=>{const r=Math.PI*a/180;return `<circle cx="${(12+6.3*Math.cos(r)).toFixed(1)}" cy="${(12+6.3*Math.sin(r)).toFixed(1)}" r=".55"/>`}).join(''),
+ zigzag:'<path d="M2 8l3.3-3 3.3 3 3.4-3 3.3 3 3.4-3L22 8M2 19l3.3-3 3.3 3 3.4-3 3.3 3 3.4-3L22 19"/><path d="M2 12.5h20"/><circle cx="7" cy="12.5" r=".6"/><circle cx="12" cy="12.5" r=".6"/><circle cx="17" cy="12.5" r=".6"/>'
+};
+const svg=(k,cls='i')=>`<svg class="${cls}" viewBox="0 0 24 24" aria-hidden="true">${I[k]}</svg>`;
+const NAMES={curryleaf:'Curry leaf',lotus:'Lotus',frangipani:'Frangipani',hibiscus:'Hibiscus',fern:'Fern frond',palm:'Coconut palm',rice:'Rice stalk',chilli:'Chilli',cinnamon:'Cinnamon',staranise:'Star anise',cardamom:'Cardamom pod',coconut:'Coconut',sun:'Sun',wave:'Water / wave',flame:'Flame',mountain:'Mountain',moon:'Moon',drop:'Raindrop',sprout:'Sprouting seed',claypot:'Clay pot',mortar:'Mortar & pestle',bowl:'Steaming bowl',leafplate:'Banana-leaf plate',spoon:'Spoon',spiral:'Spiral',heart:'Heart',mandala:'Mandala',lamp:'Oil lamp',tree:'Tree of life',hands:'Open hands',people:'Circle of people',heartHands:'Heart in hands',rings:'Linked circles',kolam:'Kolam-style',weave:'Weave',batik:'Batik dot',zigzag:'Textile border'};
+
+/* leaf drawn five ways (64px grid) */
+const LEAF='M10 54C10 30 26 12 54 10c0 28-18 44-44 44z';
+const STYLES=[
+ ['line','Fine line','Light, elegant, modern',`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="${LEAF}"/><path d="M10 54 40 24M24 40h10M30 34V24"/></svg>`],
+ ['solid','Bold &amp; solid','Strong, graphic, reads tiny',`<svg viewBox="0 0 64 64"><path fill="currentColor" d="${LEAF}"/><path d="M12 52 40 24" stroke="var(--bg)" stroke-width="3.5" stroke-linecap="round"/></svg>`],
+ ['hand','Hand-drawn','Brushy, personal, imperfect',`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path stroke-width="3.2" d="M11 53C9 31 25 13 53 11c1.5 27-17 43.5-42 42"/><path stroke-width="1.4" d="M13 55c-3-21 11-40 38-43"/><path stroke-width="2.4" d="M12 52c8-8 17-17 27-27M23 41l9 .5M29 35l-.5-9"/></svg>`],
+ ['stamp','Woodcut / stamp','Textured, crafted, inherited',`<svg viewBox="0 0 64 64"><path fill="currentColor" d="${LEAF}"/><g stroke="var(--bg)" stroke-width="1.6" stroke-linecap="round"><path d="M12 52 46 18"/>${[0,1,2,3,4].map(i=>`<path d="M${20+i*6} ${44-i*6}l-6-7M${20+i*6} ${44-i*6}l7 6"/>`).join('')}</g></svg>`],
+ ['geo','Geometric','Built from simple shapes and dots',`<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"><path d="M10 54 54 10M10 54l8-30 36-14M10 54l30-8 14-36"/><g fill="currentColor" stroke="none"><circle cx="24" cy="40" r="2.2"/><circle cx="32" cy="32" r="2.2"/><circle cx="40" cy="24" r="2.2"/></g></svg>`]
+];
+
+/* ---------- colour library (sampled from Mem's vision boards) ---------- */
+const SW=[
+ ['turmeric','Turmeric','#C99238'],['cinnamon','Cinnamon','#8A4B24'],['chilli','Chilli','#B23A1E'],['clay','Clay pot','#883D17'],
+ ['curry','Curry leaf','#5D5929'],['tea','Tea estate','#6E7B3A'],['forest','Jungle','#2E3518'],['banana','Banana leaf','#7F8138'],
+ ['cream','Coconut cream','#EFE4CF'],['sand','Sand','#D0B081'],['jaggery','Jaggery','#5E3618'],['tamarind','Tamarind','#58471F'],
+ ['lagoon','Lagoon','#00565D'],['shallows','Shallows','#5A9A99'],['hibiscus','Hibiscus','#B54368'],['mango','Mango','#D9A024'],
+ ['bush','Native bush','#25412A'],['sage','Sage','#8E9B7A'],['lake','Lake','#3E5A60'],['kowhai','Kōwhai','#E3B53A'],
+ ['coral','Sunset coral','#D9734E'],['plum','Dusk plum','#5B3046']
+];
+const HEX=Object.fromEntries(SW.map(s=>[s[0],s[2]]));
+const swatchCard=(s,hero)=>`<button type="button" class="card swatch${hero?' hero-pick':''}" data-v="${s[0]}"><div class="blk" style="background:${s[2]}"></div><div class="cap"><b>${s[1]}</b><span>${s[2]}</span></div></button>`;
+const BOARDS={};
+
+/* ---------- questions ---------- */
+const FAMS=[
+ ['flora','Flora &amp; botanicals','Leaves, flowers, plants',['curryleaf','lotus','frangipani','fern']],
+ ['spice','Spices &amp; ingredients','What goes into the pot',['chilli','cinnamon','staranise','cardamom']],
+ ['elements','Natural elements','Sun, water, fire, earth',['sun','wave','flame','mountain']],
+ ['kitchen','Kitchen &amp; table','The tools of cooking and sharing',['claypot','mortar','bowl','leafplate']],
+ ['spirit','Spiritual &amp; symbolic','Meaning, ritual, the soul',['spiral','mandala','lamp','tree']],
+ ['people','People &amp; connection','Hands, gathering, belonging',['hands','people','heartHands','rings']],
+ ['pattern','Pattern &amp; craft','Textiles, kolam, weaving',['kolam','weave','batik','zigzag']]
+];
+const Q=[
+ {part:1},
+ {id:'fam',kind:'rate',grid:'',title:'Which families of symbols feel like Mem\'s Soul Food?',sub:'Each card is a family of symbols we could draw from. Rate each one. Love it, maybe, or not me.',
+  items:FAMS.map(([id,n,s,ic])=>({id,html:`<div class="icons">${ic.map(k=>`<span>${svg(k)}</span>`).join('')}</div><div class="cap"><b>${n}</b><span>${s}</span></div>`}))},
+ {id:'icons',kind:'pick',max:6,grid:'xs',cls:'ico',title:'Now pick your favourite individual symbols',sub:'Choose up to six. Pick the ones that make you smile or mean something to you.',
+  items:Object.keys(I).map(k=>({id:k,html:`<span class="g">${svg(k)}</span><b>${NAMES[k]}</b>`})),
+  after:[['why','Write any other ideas you have here ...','e.g. "Mum always cooked in a clay pot", "the curry leaf tree at my grandmother\'s house"']]},
+ {id:'feel',kind:'sliders',title:'Find the balance',sub:'Drag each dot towards the side that feels right. Leave it in the middle if you\'re unsure.',
+  items:[['Easy to recognise (a real chilli)','Abstract (a shape that hints at it)'],['One hero symbol','A whole family of little symbols'],['Simple and minimal','Rich and detailed'],['Quiet, in the background','Front and centre']]},
+ {id:'spirit',kind:'pick',max:1,grid:'lg',cls:'opt',title:'How do you feel about spiritual symbols?',sub:'Sri Lanka and the Philippines hold many faiths, so we want to use these with care. There\'s no right answer here.',
+  items:[
+   {id:'central',html:`<b>They're at the heart of it</b><span>Spirit and soul should be visible in the brand. We'd check every symbol with you and a local adviser.</span><div class="eg"><span>${svg('lotus')}</span><span>${svg('lamp')}</span><span>${svg('mandala')}</span></div>`},
+   {id:'gentle',html:`<b>Gently, and universal only</b><span>Symbols that speak to everyone, with no single faith attached.</span><div class="eg"><span>${svg('sun')}</span><span>${svg('heart')}</span><span>${svg('spiral')}</span></div>`},
+   {id:'none',html:`<b>Keep them out of the brand</b><span>Let the food, nature and people carry the soul.</span><div class="eg"><span>${svg('bowl')}</span><span>${svg('curryleaf')}</span><span>${svg('hands')}</span></div>`}
+  ],
+  after:[['note','Any symbols that are sacred or special to you or your family?','Tell us anything we should use, or must not use.']]},
+ {id:'edition',kind:'pick',max:1,grid:'sm',cls:'opt',title:'Each country gets its own motif. Where should it come from?',sub:'The master brand stays the same everywhere. Each edition (Sri Lanka, Philippines, New Zealand, Australia) adds one local motif.',
+  items:[
+   {id:'flower',html:`<b>A local plant or flower</b><span>Curry leaf, sampaguita, fern, wattle</span><div class="eg"><span>${svg('curryleaf')}</span><span>${svg('fern')}</span></div>`},
+   {id:'food',html:`<b>A signature ingredient</b><span>Cinnamon, coconut, mango, kūmara</span><div class="eg"><span>${svg('cinnamon')}</span><span>${svg('coconut')}</span></div>`},
+   {id:'pattern',html:`<b>A local pattern or textile</b><span>Kolam, weaving, batik</span><div class="eg"><span>${svg('kolam')}</span><span>${svg('weave')}</span></div>`},
+   {id:'land',html:`<b>The landscape</b><span>Mountains, coastline, rivers</span><div class="eg"><span>${svg('mountain')}</span><span>${svg('wave')}</span></div>`}
+  ],
+  after:[['core','If one symbol had to travel with you to every country, what would it be?','It could be from this page, or something else entirely.']]},
+ {part:2},
+ {id:'pal',kind:'rate',grid:'',cls:'pal',title:'Rate these palette directions',sub:'Each one is built from your boards and the food. Love it, maybe, or not me.',
+  items:[
+   ['spice','Spice Market','Turmeric, clay and curry leaf. Earthy and warm.',['#2E3518','#5D5929','#883D17','#C99238','#D0B081']],
+   ['kitchen','Mem\'s Kitchen','Coconut cream, turmeric and jaggery. Soft and welcoming.',['#EFE4CF','#D0B081','#C99238','#883D17','#5E3618']],
+   ['lagoon','Island Lagoon','Lagoon teal with hibiscus and mango. Fresh and joyful.',['#00565D','#5A9A99','#EFE4CF','#B54368','#D9A024']],
+   ['fern','Fern &amp; Firelight','Deep bush green with a glow of gold. Calm and grounded.',['#162216','#25412A','#8E9B7A','#EDE6D6','#C9A24A']],
+   ['golden','Golden Hour','The sunsets on all three boards. Glowing and soulful.',['#F2C46B','#D9734E','#A64B2A','#5B3046','#2B2420']],
+   ['market','Market Day','Chilli, mango and hibiscus. Bright and full of life.',['#B23A1E','#D9A024','#B54368','#2E7D5B','#00565D']]
+  ].map(([id,n,s,c])=>({id,html:`<div class="sw">${c.map(x=>`<i style="background:${x}"></i>`).join('')}</div><div class="cap"><b>${n}</b><span>${s}</span></div>`}))},
+ {id:'hero',kind:'pick',max:3,grid:'xs',raw:true,title:'Pick your hero colour',sub:'The one colour people should think of when they think of Mem\'s Soul Food. Not sure? Pick up to three and we\'ll narrow it down together.',
+  items:SW.map(s=>({id:s[0],card:swatchCard(s,true)}))},
+ {id:'support',kind:'pick',max:4,grid:'xs',raw:true,title:'Now pick up to four colours to sit beside it',sub:'These are the supporting colours: backgrounds, accents and details.',
+  items:SW.map(s=>({id:s[0],card:swatchCard(s)}))},
+ {id:'cfeel',kind:'sliders',title:'Set the colour mood',sub:'Drag each dot towards what feels right.',
+  items:[['Warm (spice, sun, earth)','Cool (ocean, forest, sky)'],['Earthy and soft','Vibrant and bold'],['Light and airy','Deep and rich'],['A few colours, used calmly','Lots of colour, a celebration']]},
+ {id:'cnote',kind:'fields',title:'Colours with meaning',sub:'Colour can carry a lot of memory. Tell us anything that matters.',
+  fields:[['meaning','Colours that mean something to you','A sari of your mother\'s, the colour of your kitchen, a festival, a place…'],['avoid','Colours you don\'t like or want to avoid','Anything that feels wrong, or has a meaning we should be careful with']]}
+];
+
+/* ---------- state ---------- */
+let S={}; try{ S=JSON.parse(localStorage.getItem('msf-symcol')||'{}')||{} }catch(e){ S={} }
+const get=(k,d)=> S[k]===undefined?d:S[k];
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let qn=0;
+function fieldsHTML(q,list){ return `<div class="two">${list.map(([k,l,h])=>`<div class="field"><label for="f-${q.id}-${k}">${l}</label><textarea id="f-${q.id}-${k}" data-f="${q.id}.${k}" placeholder="${esc(h)}">${esc(get(q.id+'.'+k,''))}</textarea></div>`).join('')}</div>`; }
+function qHTML(q){
+  if(q.part===1) return `<div class="part"><span class="k">Part 1</span><h2>Symbols</h2><p>The little drawings that sit with your name, frame your posts and appear on screen. Let's find which world they come from and how they're drawn.</p></div>`;
+  if(q.part===2) return `<div class="part" style="background:var(--rust)"><span class="k">Part 2</span><h2>Colour</h2><p>We've started from the colours in your three vision boards. Let's find the core palette that travels with the series everywhere.</p></div>`;
+  qn++;
+  let h=`<section class="q" id="q-${q.id}"><div class="qh"><span class="num">Question ${qn}</span><h2>${q.title}</h2><p>${q.sub}</p></div>`;
+  if(q.kind==='rate') h+=`<div class="grid ${q.grid}">${q.items.map(it=>{const v=get(q.id+'.'+it.id,'');return `<div class="card fam ${q.cls||''}">${it.html}<div class="rate" role="group">${[['love','Love'],['maybe','Maybe'],['no','Not me']].map(([r,l])=>`<button type="button" class="${r}" data-q="${q.id}" data-item="${it.id}" data-r="${r}" aria-pressed="${v===r}">${l}</button>`).join('')}</div></div>`}).join('')}</div>`;
+  if(q.kind==='pick'){ const sel=[].concat(get(q.id,[]));
+    h+=`${q.max>1?`<div class="count" id="c-${q.id}">${sel.length} of ${q.max} chosen</div>`:''}<div class="grid ${q.grid}" data-pick="${q.id}">${q.items.map(it=> it.card ? it.card.replace('<button ',`<button data-q="${q.id}" aria-pressed="${sel.includes(it.id)}" `) : `<button type="button" class="card ${q.cls}" data-q="${q.id}" data-v="${it.id}" aria-pressed="${sel.includes(it.id)}">${it.html}</button>`).join('')}</div>`;
+    if(q.after) h+=fieldsHTML(q,q.after); }
+  if(q.kind==='sliders') h+=`<div class="sliders">${q.items.map(([a,b],i)=>`<div class="sl"><div class="ends"><span>${a}</span><span>${b}</span></div><input type="range" min="0" max="100" id="s-${q.id}-${i}" data-s="${q.id}.${i}" value="${get(q.id+'.'+i,50)}" aria-label="${esc(a)} to ${esc(b)}"></div>`).join('')}</div>`;
+  if(q.kind==='fields') h+=fieldsHTML(q,q.fields);
+  if(q.kind==='accents') h+=`<div class="acc">${q.countries.map(([c,n,s,opts])=>`<div class="acc-row"><h3>${n}<small>${s}</small></h3><div class="acc-opts">${opts.map(([id,l,x])=>`<button type="button" class="card" data-q="acc.${c}" data-v="${id}" aria-pressed="${get('acc.'+c,'')===id}"><div class="blk" style="background:linear-gradient(90deg,#EFE4CF 0 22%,#24301A 22% 44%,${x} 44%)"></div><div class="cap"><b>${l}</b></div></button>`).join('')}</div></div>`).join('')}</div>`;
+  return h+'</section>';
+}
+function render(){ qn=0; document.getElementById('app').innerHTML=Q.map(qHTML).join(''); progress(); }
+const has=k=>{const v=S[k];return v!==undefined&&v!==''&&!(Array.isArray(v)&&!v.length)};
+function answered(q){ if(q.part) return null;
+  if(q.kind==='accents') return q.countries.some(c=>has('acc.'+c[0]));
+  return Object.keys(S).some(k=>(k===q.id||k.startsWith(q.id+'.'))&&has(k)); }
+function progress(){ const qs=Q.filter(q=>!q.part); const n=qs.filter(answered).length; document.getElementById('progbar').style.width=(n/qs.length*100)+'%'; }
+
+document.getElementById('app').addEventListener('click',e=>{
+  const b=e.target.closest('button[data-q]'); if(!b) return;
+  const qid=b.dataset.q;
+  if(b.dataset.r){ const k=qid+'.'+b.dataset.item; S[k]= S[k]===b.dataset.r?'':b.dataset.r;
+    b.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',S[k]===x.dataset.r)); changed(); return; }
+  const v=b.dataset.v; const q=Q.find(x=>x.id===qid);
+  if(!q){ S[qid]= S[qid]===v?'':v; b.parentElement.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',S[qid]===x.dataset.v)); changed(); return; }
+  if(q.max===1){ S[qid]= S[qid]===v?'':v; b.closest('.grid').querySelectorAll('button[data-q]').forEach(x=>x.setAttribute('aria-pressed',S[qid]===x.dataset.v)); }
+  else { let sel=[].concat(get(qid,[])); if(sel.includes(v)) sel=sel.filter(x=>x!==v); else { if(sel.length>=q.max){ const c=document.getElementById('c-'+qid); c.textContent=`You can choose up to ${q.max}. Tap one to remove it first.`; return; } sel.push(v); }
+    S[qid]=sel; b.setAttribute('aria-pressed',sel.includes(v)); document.getElementById('c-'+qid).textContent=`${sel.length} of ${q.max} chosen`; }
+  changed();
+});
+document.getElementById('app').addEventListener('input',e=>{ const t=e.target;
+  if(t.dataset.f){ S[t.dataset.f]=t.value; changed(); } if(t.dataset.s){ S[t.dataset.s]=+t.value; changed(); } });
+
+/* ---------- saving ---------- */
+const statusEl=document.getElementById('status');
+let ref=null,timer=null,saving=false,again=false;
+function changed(){ progress(); try{localStorage.setItem('msf-symcol',JSON.stringify(S))}catch(e){}
+  statusEl.textContent= ref?'Saving…':'Saved on this device'; clearTimeout(timer); timer=setTimeout(save,1200); }
+async function save(){ if(!ref) return false; if(saving){ again=true; return false; } saving=true;
+  try{ await ref.set({answers:JSON.stringify(S),summary:asText(),updatedAt:new Date().toISOString(),submittedAt:S._submittedAt||''}); statusEl.textContent='All changes saved'; return true; }
+  catch(err){ statusEl.textContent='Saved on this device only'; return false; }
+  finally{ saving=false; if(again){ again=false; setTimeout(save,300); } } }
+render();
+(async()=>{ try{
+  const db=window.claude && await window.claude.use('db');
+  if(!db){ statusEl.textContent=Object.keys(S).length?'Saved on this device':'Saves on this device'; return; }
+  ref=db.doc('responses/mem');
+  const snap=await Promise.race([ref.get(),new Promise((_,r)=>setTimeout(()=>r('t'),10000))]);
+  if(snap&&snap.exists){ const d=snap.data()||{}; try{ const remote=JSON.parse(d.answers||'{}'); if(Object.keys(remote).length>=Object.keys(S).length){ S=remote; render(); } }catch(e){} }
+  statusEl.textContent='Connected · saves as you go';
+}catch(e){ statusEl.textContent='Saved on this device'; } })();
+
+/* ---------- text summary ---------- */
+function asText(){ const L=[]; let n=0; const lbl=(id,list)=>(list||[]).forEach(([k,l])=>{ if(S[id+'.'+k]) L.push(`${l}: ${S[id+'.'+k]}`); });
+  const strip=s=>s.replace(/&amp;/g,'&').replace(/<[^>]+>/g,'');
+  Q.forEach(q=>{ if(q.part){ L.push(`\n== PART ${q.part}: ${q.part===1?'SYMBOLS':'COLOUR'} ==`); return; } n++; L.push(`\n${n}. ${strip(q.title)}`);
+    if(q.id==='fam') FAMS.forEach(f=>{ const v=S['fam.'+f[0]]; if(v) L.push(`${strip(f[1])}: ${v==='no'?'not me':v}`); });
+    if(q.id==='pal') q.items.forEach(it=>{ const v=S['pal.'+it.id]; if(v) L.push(`${it.id}: ${v==='no'?'not me':v}`); });
+    if(q.kind==='pick'){ const s=[].concat(get(q.id,[])).filter(Boolean);
+      const nm=v=> q.id==='icons'?NAMES[v]: (q.id==='hero'||q.id==='support')?`${(SW.find(x=>x[0]===v)||[])[1]} ${HEX[v]}`: q.id==='style'?strip(STYLES.find(x=>x[0]===v)[1]): v;
+      L.push('Chosen: '+(s.map(nm).join(', ')||'—')); lbl(q.id,q.after); }
+    if(q.kind==='sliders') q.items.forEach(([a,b],i)=>{ const v=get(q.id+'.'+i,50); L.push(`${a} ↔ ${b}: ${v<45?'leans '+a:v>55?'leans '+b:'balanced'} (${v})`); });
+    if(q.kind==='accents') q.countries.forEach(([c,nm,,o])=>{ const v=S['acc.'+c]; const f=o.find(x=>x[0]===v); L.push(`${nm}: ${f?f[1]+' '+f[2]:'—'}`); });
+    if(q.kind==='fields') lbl(q.id,q.fields);
+  });
+  return "Mem's Soul Food: symbols and colour answers"+L.join('\n'); }
+async function emailAnswers(){
+  try{ const r=await fetch('https://formsubmit.co/ajax/design@pdccreative.co.nz',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({_subject:"Mem's Soul Food: Symbols & Colour answers",_template:'box',_captcha:'false',Answers:asText(),'Sent at':new Date().toLocaleString('en-NZ'),'Raw data':JSON.stringify(S)})});
+    const j=await r.json().catch(()=>({})); return r.ok && String(j.success)!=='false'; }catch(e){ return false; } }
+document.getElementById('submit').addEventListener('click',async()=>{ const btn=document.getElementById('submit'); btn.disabled=true; btn.textContent='Sending…';
+  S._submittedAt=new Date().toISOString(); changed(); clearTimeout(timer);
+  await save(); const ok=await emailAnswers(); btn.disabled=false; btn.textContent=ok?'Send again':'Send to the PDC team'; document.getElementById('finishMsg').textContent= ok?'Sent. Thank you! The PDC team can now see your answers.':'We couldn\'t send from here. Tap "Copy my answers as text" and paste them into an email to design@pdccreative.co.nz.'; });
+document.getElementById('copy').addEventListener('click',async()=>{ const t=asText(), box=document.getElementById('copyBox'); box.value=t;
+  try{ await navigator.clipboard.writeText(t); document.getElementById('finishMsg').textContent='Copied. Paste it into an email to design@pdccreative.co.nz.'; }
+  catch(e){ box.hidden=false; box.style.minHeight='220px'; box.select(); document.getElementById('finishMsg').textContent='Select all the text below and copy it.'; } });
+</script>
+
+</body></html>
