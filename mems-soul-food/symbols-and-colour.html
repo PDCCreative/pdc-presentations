@@ -355,10 +355,16 @@ function asText(){ const L=[]; let n=0; const lbl=(id,list)=>(list||[]).forEach(
 async function emailAnswers(){
   try{ const r=await fetch('https://formsubmit.co/ajax/design@pdccreative.co.nz',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({_subject:"Mem's Soul Food: Symbols & Colour answers",_template:'box',_captcha:'false',Answers:asText(),'Sent at':new Date().toLocaleString('en-NZ'),'Raw data':JSON.stringify(S)})});
-    const j=await r.json().catch(()=>({})); return r.ok && String(j.success)!=='false'; }catch(e){ return false; } }
+    const j=await r.json().catch(()=>({})); const ok=r.ok && String(j.success)!=='false';
+    if(!ok) console.warn('FormSubmit:',r.status,j);
+    return {ok, activation:/activat/i.test(j.message||''), msg:j.message||('HTTP '+r.status)}; }
+  catch(e){ console.warn('FormSubmit:',e); return {ok:false, msg:String(e&&e.message||e)}; } }
 document.getElementById('submit').addEventListener('click',async()=>{ const btn=document.getElementById('submit'); btn.disabled=true; btn.textContent='Sending…';
   S._submittedAt=new Date().toISOString(); changed(); clearTimeout(timer);
-  await save(); const ok=await emailAnswers(); btn.disabled=false; btn.textContent=ok?'Send again':'Send to the PDC team'; document.getElementById('finishMsg').textContent= ok?'Sent. Thank you! The PDC team can now see your answers.':'We couldn\'t send from here. Tap "Copy my answers as text" and paste them into an email to design@pdccreative.co.nz.'; });
+  await save(); const res=await emailAnswers(); const ok=res.ok; btn.disabled=false; btn.textContent=ok?'Send again':'Send to the PDC team';
+  document.getElementById('finishMsg').textContent= ok?'Sent. Thank you! The PDC team can now see your answers.'
+    : res.activation?'Nearly there. The PDC team needs to confirm this form by email before answers can arrive. Your answers are saved on this device, so please tap Send again a little later, or tap "Copy my answers as text" and email them to design@pdccreative.co.nz.'
+    : 'We couldn\'t send from here ('+res.msg+'). Your answers are saved on this device. Tap "Copy my answers as text" and paste them into an email to design@pdccreative.co.nz.'; });
 document.getElementById('copy').addEventListener('click',async()=>{ const t=asText(), box=document.getElementById('copyBox'); box.value=t;
   try{ await navigator.clipboard.writeText(t); document.getElementById('finishMsg').textContent='Copied. Paste it into an email to design@pdccreative.co.nz.'; }
   catch(e){ box.hidden=false; box.style.minHeight='220px'; box.select(); document.getElementById('finishMsg').textContent='Select all the text below and copy it.'; } });
