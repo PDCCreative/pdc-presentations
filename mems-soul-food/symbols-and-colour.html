@@ -352,19 +352,21 @@ function asText(){ const L=[]; let n=0; const lbl=(id,list)=>(list||[]).forEach(
     if(q.kind==='fields') lbl(q.id,q.fields);
   });
   return "Mem's Soul Food: symbols and colour answers"+L.join('\n'); }
-async function emailAnswers(){
-  try{ const r=await fetch('https://formsubmit.co/ajax/design@pdccreative.co.nz',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({_subject:"Mem's Soul Food: Symbols & Colour answers",_template:'box',_captcha:'false',Answers:asText(),'Sent at':new Date().toLocaleString('en-NZ'),'Raw data':JSON.stringify(S)})});
-    const j=await r.json().catch(()=>({})); const ok=r.ok && String(j.success)!=='false';
-    if(!ok) console.warn('FormSubmit:',r.status,j);
-    return {ok, activation:/activat/i.test(j.message||''), msg:j.message||('HTTP '+r.status)}; }
-  catch(e){ console.warn('FormSubmit:',e); return {ok:false, msg:String(e&&e.message||e)}; } }
-document.getElementById('submit').addEventListener('click',async()=>{ const btn=document.getElementById('submit'); btn.disabled=true; btn.textContent='Sending…';
-  S._submittedAt=new Date().toISOString(); changed(); clearTimeout(timer);
-  await save(); const res=await emailAnswers(); const ok=res.ok; btn.disabled=false; btn.textContent=ok?'Send again':'Send to the PDC team';
-  document.getElementById('finishMsg').textContent= ok?'Sent. Thank you! The PDC team can now see your answers.'
-    : res.activation?'Nearly there. The PDC team needs to confirm this form by email before answers can arrive. Your answers are saved on this device, so please tap Send again a little later, or tap "Copy my answers as text" and email them to design@pdccreative.co.nz.'
-    : 'We couldn\'t send from here ('+res.msg+'). Your answers are saved on this device. Tap "Copy my answers as text" and paste them into an email to design@pdccreative.co.nz.'; });
+/* Email via FormSubmit's standard form post (more reliable than its AJAX endpoint). Answers stay in localStorage, so leaving the page loses nothing. */
+function emailAnswers(){
+  const f=document.createElement('form'); f.method='POST'; f.action='https://formsubmit.co/design@pdccreative.co.nz'; f.acceptCharset='UTF-8'; f.style.display='none';
+  const back=location.href.split('#')[0].split('?')[0]+'?sent=1#finish';
+  const add=(n,v)=>{const t=document.createElement('textarea'); t.name=n; t.value=v; f.appendChild(t);};
+  add('_subject',"Mem's Soul Food: Symbols & Colour answers"); add('_template','box'); add('_captcha','false'); add('_next',back);
+  add('Answers',asText()); add('Sent at',new Date().toLocaleString('en-NZ')); add('Raw data',JSON.stringify(S));
+  document.body.appendChild(f); f.submit(); }
+document.getElementById('submit').addEventListener('click',()=>{ const btn=document.getElementById('submit'); btn.disabled=true; btn.textContent='Sending…';
+  S._submittedAt=new Date().toISOString(); changed(); clearTimeout(timer); save();
+  try{ emailAnswers(); }catch(e){ btn.disabled=false; btn.textContent='Send to the PDC team';
+    document.getElementById('finishMsg').textContent='We couldn\'t send from here. Your answers are saved on this device. Tap "Copy my answers as text" and paste them into an email to design@pdccreative.co.nz.'; }
+  setTimeout(()=>{ btn.disabled=false; btn.textContent='Send to the PDC team'; },15000); });
+if(/[?&]sent=1/.test(location.search)){ document.getElementById('finishMsg').textContent='Sent. Thank you! The PDC team now has your answers.'; document.getElementById('submit').textContent='Send again';
+  history.replaceState(null,'',location.pathname+'#finish'); }
 document.getElementById('copy').addEventListener('click',async()=>{ const t=asText(), box=document.getElementById('copyBox'); box.value=t;
   try{ await navigator.clipboard.writeText(t); document.getElementById('finishMsg').textContent='Copied. Paste it into an email to design@pdccreative.co.nz.'; }
   catch(e){ box.hidden=false; box.style.minHeight='220px'; box.select(); document.getElementById('finishMsg').textContent='Select all the text below and copy it.'; } });
