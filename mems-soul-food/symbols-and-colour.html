@@ -142,7 +142,7 @@ textarea{width:100%;font:inherit;color:var(--ink);background:var(--paper);border
   <div id="app"></div>
   <section class="finish" id="finish">
     <h2>Thank you, Mem.</h2>
-    <p>When you're happy, tap Send to the PDC team. You can still come back and change your answers afterwards.</p>
+    <p>When you're happy, tap Send to the PDC team. Your email app will open with your answers already written in, so you just press Send. You can still come back and change your answers afterwards.</p>
     <div class="btns">
       <button class="btn" id="submit" type="button">Send to the PDC team</button>
       <button class="btn ghost" id="copy" type="button">Copy my answers as text</button>
@@ -352,21 +352,13 @@ function asText(){ const L=[]; let n=0; const lbl=(id,list)=>(list||[]).forEach(
     if(q.kind==='fields') lbl(q.id,q.fields);
   });
   return "Mem's Soul Food: symbols and colour answers"+L.join('\n'); }
-/* Email via FormSubmit's standard form post (more reliable than its AJAX endpoint). Answers stay in localStorage, so leaving the page loses nothing. */
-function emailAnswers(){
-  const f=document.createElement('form'); f.method='POST'; f.action='https://formsubmit.co/design@pdccreative.co.nz'; f.acceptCharset='UTF-8'; f.style.display='none';
-  const back=location.href.split('#')[0].split('?')[0]+'?sent=1#finish';
-  const add=(n,v)=>{const t=document.createElement('textarea'); t.name=n; t.value=v; f.appendChild(t);};
-  add('_subject',"Mem's Soul Food: Symbols & Colour answers"); add('_template','box'); add('_captcha','false'); add('_next',back);
-  add('Answers',asText()); add('Sent at',new Date().toLocaleString('en-NZ')); add('Raw data',JSON.stringify(S));
-  document.body.appendChild(f); f.submit(); }
-document.getElementById('submit').addEventListener('click',()=>{ const btn=document.getElementById('submit'); btn.disabled=true; btn.textContent='Sending…';
+/* Email via the viewer's own mail app (mailto). No third-party service to go down; answers also stay in localStorage. */
+function mailtoURL(){ return 'mailto:design@pdccreative.co.nz?subject='+encodeURIComponent("Mem's Soul Food: Symbols & Colour answers")+'&body='+encodeURIComponent("Hi PDC team,\n\nHere are my answers.\n"+asText()+"\n"); }
+document.getElementById('submit').addEventListener('click',()=>{
   S._submittedAt=new Date().toISOString(); changed(); clearTimeout(timer); save();
-  try{ emailAnswers(); }catch(e){ btn.disabled=false; btn.textContent='Send to the PDC team';
-    document.getElementById('finishMsg').textContent='We couldn\'t send from here. Your answers are saved on this device. Tap "Copy my answers as text" and paste them into an email to design@pdccreative.co.nz.'; }
-  setTimeout(()=>{ btn.disabled=false; btn.textContent='Send to the PDC team'; },15000); });
-if(/[?&]sent=1/.test(location.search)){ document.getElementById('finishMsg').textContent='Sent. Thank you! The PDC team now has your answers.'; document.getElementById('submit').textContent='Send again';
-  history.replaceState(null,'',location.pathname+'#finish'); }
+  location.href=mailtoURL();
+  document.getElementById('submit').textContent='Open the email again';
+  document.getElementById('finishMsg').textContent='Your email app should now open with your answers already written in. Just press Send there. If nothing opened, tap "Copy my answers as text" and paste them into an email to design@pdccreative.co.nz.'; });
 document.getElementById('copy').addEventListener('click',async()=>{ const t=asText(), box=document.getElementById('copyBox'); box.value=t;
   try{ await navigator.clipboard.writeText(t); document.getElementById('finishMsg').textContent='Copied. Paste it into an email to design@pdccreative.co.nz.'; }
   catch(e){ box.hidden=false; box.style.minHeight='220px'; box.select(); document.getElementById('finishMsg').textContent='Select all the text below and copy it.'; } });
